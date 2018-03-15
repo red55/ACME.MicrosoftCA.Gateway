@@ -34,11 +34,7 @@ namespace ACME.MicrosoftCA.Gateway
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc(routes=>
-                routes.MapRoute(
-                    name: "acme",
-                    template: "{controller=ACME}/{action}"
-                    ));
+            app.UseMvc();
         }
     }
 }

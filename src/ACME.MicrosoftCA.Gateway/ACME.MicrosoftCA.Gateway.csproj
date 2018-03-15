@@ -20,6 +20,8 @@
     <PackageReference Include="codecracker.CSharp" Version="1.0.1" />
     <PackageReference Include="jose-jwt" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="6.8.2.4717" />
   </ItemGroup>
 
