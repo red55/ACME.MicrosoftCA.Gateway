@@ -3,7 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACME.MicrosoftCA.Gateway", "ACME.MicrosoftCA.Gateway\ACME.MicrosoftCA.Gateway.csproj", "{E9776FC2-00C1-4BBD-B0B1-F54553802323}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACME.MicrosoftCA.Gateway", "src\ACME.MicrosoftCA.Gateway\ACME.MicrosoftCA.Gateway.csproj", "{E9776FC2-00C1-4BBD-B0B1-F54553802323}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4AEFA52D-8D47-4484-97E9-C253E4CFC251}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\draft-ietf-acme-acme.html = Docs\draft-ietf-acme-acme.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{F5FBB87B-4224-4F2A-B705-FA14A1812F15}"
+	ProjectSection(SolutionItems) = preProject
+		SonarQube\ACMEMSCAG_masterCSharp.ruleset = SonarQube\ACMEMSCAG_masterCSharp.ruleset
+		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

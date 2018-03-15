@@ -1,0 +1,11 @@
+{
+  "ServerUri": "http://sonar.csi-group.local",
+  "Organization": null,
+  "ProjectKey": "ACMEMSCAG:master",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AV57RMY0nsL5FE-6AEOp",
+      "ProfileTimestamp": "2018-01-11T17:45:14+03:00"
+    }
+  }
+}
