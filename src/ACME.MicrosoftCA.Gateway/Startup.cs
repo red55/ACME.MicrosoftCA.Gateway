@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ACME.MicrosoftCA.Gateway.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,12 @@ namespace ACME.MicrosoftCA.Gateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //According to draft-ietf-acme-acme.html 6.1
+            services.AddCors((options) =>
+            {
+                options.AddPolicy(@"AllowAllOrigins", (policy) => policy.AllowAnyOrigin());
+            });
+            services.Configure<Config>(Config.SECTION_NAME, Configuration);
             services.AddMvc();
         }
 
@@ -38,8 +45,7 @@ namespace ACME.MicrosoftCA.Gateway
             {
                 context.Response.OnStarting (() =>
                 {
-                    context.Response.ContentType = "application/json";
-                    context.Response.Headers.Add("Replay-Nonce", "asd");
+                    context.Response.Headers.Add(@"Replay-Nonce", Guid.NewGuid().ToString(@"N"));
                     return Task.FromResult(0);
                 });
 

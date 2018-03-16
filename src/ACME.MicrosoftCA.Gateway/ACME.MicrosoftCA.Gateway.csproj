@@ -22,6 +22,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\acme\Controllers\" />
+    <Folder Include="Areas\acme\Data\" />
+    <Folder Include="Areas\acme\Models\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
