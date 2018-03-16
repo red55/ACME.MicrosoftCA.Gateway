@@ -9,15 +9,16 @@ namespace ACME.MicrosoftCA.Gateway.Controllers
 {
 #pragma warning disable S101 // Types should be named in camel case
 
-
     public class ACMEController : APIController
     {
 
         [Route(@"acme/directory")]
+        [Route(@"directory")]
         [HttpGet]
         public ActionResult Directory()
         {
             var myHostName = this.HttpContext.Request.Host;
+
             return Json(new Models.API.Directory
             {
                 newNonce = new Uri($"http://{myHostName}/acme/new-nonce"),
@@ -28,6 +29,7 @@ namespace ACME.MicrosoftCA.Gateway.Controllers
                 keyChange = new Uri($"http://{myHostName}/acme/key-change")
             });
         }
+        
 
     }
 }

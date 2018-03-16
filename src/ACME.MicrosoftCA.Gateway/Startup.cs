@@ -34,6 +34,18 @@ namespace ACME.MicrosoftCA.Gateway
                 app.UseDeveloperExceptionPage();
             }
 
+            app.Use( async (context, next) =>
+            {
+                context.Response.OnStarting (() =>
+                {
+                    context.Response.ContentType = "application/json";
+                    context.Response.Headers.Add("Replay-Nonce", "asd");
+                    return Task.FromResult(0);
+                });
+
+                if (null != next)
+                    await next();
+            });
             app.UseMvc();
         }
     }
