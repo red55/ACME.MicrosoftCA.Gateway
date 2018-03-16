@@ -11,8 +11,6 @@ namespace ACME.MicrosoftCA.Gateway.Controllers
 
     public class ACMEController : APIController
     {
-
-        [Route(@"acme/directory")]
         [Route(@"directory")]
         [HttpGet]
         public ActionResult Directory()
