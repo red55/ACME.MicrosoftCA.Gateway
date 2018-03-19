@@ -56,6 +56,10 @@ namespace ACME.MicrosoftCA.Gateway.Services
 
         public async Task VerifyNonceAsync(string nonce_)
         {
+            if (null == nonce_)
+            {
+                throw new Exceptions.BadReplayNonceException();
+            }
             var l = await
                 (from nonce in Db.IssuedNonces where nonce.Nonce == nonce_ select nonce).ToListAsync();
 

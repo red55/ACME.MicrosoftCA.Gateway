@@ -28,17 +28,20 @@ namespace ACME.MicrosoftCA.Gateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var cs = Configuration.GetSection(Config.SECTION_NAME);
+
+            services.Configure<Config>(cs);
+
             //According to draft-ietf-acme-acme.html 6.1
             services.AddCors((options) =>
             {
                 options.AddPolicy(@"AllowAllOrigins", (policy) => policy.AllowAnyOrigin());
             });
 
-            services.Configure<Config>(Config.SECTION_NAME, Configuration);
             services.AddMvc();
 
-            services.AddDbContext<DataBase>( (options) => {
-                var cfg = Configuration.Get<Config>();
+            services.AddDbContext<Services.DataBase>(contextLifetime: ServiceLifetime.Transient, optionsLifetime:ServiceLifetime.Transient, optionsAction: (options) => {
+                var cfg = cs.Get<Config>();
 
                 switch (cfg.Database.DatabaseType)
                 {
@@ -59,6 +62,8 @@ namespace ACME.MicrosoftCA.Gateway
 
                 }
             });
+
+            services.AddTransient<IReplayNonceRegistry, ReplayNocneRegistry>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
