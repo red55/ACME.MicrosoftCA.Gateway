@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACME.MicrosoftCA.Gateway.Integration.Tests", "Tests\Integration\ACME.MicrosoftCA.Gateway.Integration.Tests\ACME.MicrosoftCA.Gateway.Integration.Tests.csproj", "{7B9EC8F3-3719-48C4-82DA-5E0473BC4895}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACME.MicrosoftCA.Gateway.Unit.Tests", "Tests\Unit\ACME.MicrosoftCA.Gateway.Uint.Tests\ACME.MicrosoftCA.Gateway.Unit.Tests.csproj", "{2A55A215-7BDB-4281-8B94-318951333D46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACME.MicrosoftCA.Gateway.Unit.Tests", "Tests\Unit\ACME.MicrosoftCA.Gateway.Uint.Tests\ACME.MicrosoftCA.Gateway.Unit.Tests.csproj", "{2A55A215-7BDB-4281-8B94-318951333D46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
