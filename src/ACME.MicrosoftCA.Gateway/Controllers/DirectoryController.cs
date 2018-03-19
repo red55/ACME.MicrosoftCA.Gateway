@@ -17,11 +17,17 @@ namespace ACME.MicrosoftCA.Gateway.Controllers
     [EnableCors(@"AllowAllOrigins")]
     public class DirectoryController : APIController
     {
-        public DirectoryController (IOptionsSnapshot<Config> cfg, IActionDescriptorCollectionProvider actionDescriptorCollectionProvider) : base (cfg)
-        {
+        public DirectoryController (IOptionsSnapshot<Config> cfg
 #if DEBUG
-            _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
+            , IActionDescriptorCollectionProvider actionDescriptorCollectionProvider
 #endif
+            ) : base (cfg
+#if DEBUG
+                , actionDescriptorCollectionProvider
+#endif
+                )
+
+        {
         }
 
         [Route(@"directory")]
@@ -40,37 +46,5 @@ namespace ACME.MicrosoftCA.Gateway.Controllers
                 keyChange = new Uri(myUri, @"acme/key-change")
             });
         }
-#if DEBUG
-        private readonly IActionDescriptorCollectionProvider _actionDescriptorCollectionProvider;
-
-        public class RouteInfo
-        {
-            public string Template { get; set; }
-            public string Name { get; set; }
-            public string Controller { get; set; }
-            public string Action { get; set; }
-            public string Constraint { get; set; }
-        }
-        [HttpGet]
-        [Route(@"routes")]
-        public JsonResult Routes()
-        {
-
-            var Routes = _actionDescriptorCollectionProvider.ActionDescriptors.Items
-                    .Select(x => new RouteInfo
-                    {
-                        Action = x.RouteValues ["Action"],
-                        Controller = x.RouteValues ["Controller"],
-                        Name = x.AttributeRouteInfo?.Name,
-                        Template = x.AttributeRouteInfo?.Template,
-                        Constraint = x.ActionConstraints == null ? "" : JsonConvert.SerializeObject(x.ActionConstraints)
-                    })
-                .OrderBy(r => r.Template);
-
-
-            return Json(Routes);
-        }
-#endif
-
     }
 }
