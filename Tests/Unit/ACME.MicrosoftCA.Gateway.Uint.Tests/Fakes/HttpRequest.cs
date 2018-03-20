@@ -10,7 +10,7 @@ namespace ACME.MicrosoftCA.Gateway.Unit.Tests.Fakes
 {
     class HttpRequest : Microsoft.AspNetCore.Http.HttpRequest
     {
-        HeaderDictionary _headers = new HeaderDictionary();        
+        readonly HeaderDictionary _headers = new HeaderDictionary();        
 
         public override HttpContext HttpContext => throw new NotImplementedException();
 

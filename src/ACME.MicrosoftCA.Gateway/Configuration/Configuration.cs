@@ -27,7 +27,7 @@ namespace ACME.MicrosoftCA.Gateway.Configuration
         public DbType DatabaseType { get; set; }
         public string ConnectionString { get; set; }
     }
-    
+
 
     public class Config
     {

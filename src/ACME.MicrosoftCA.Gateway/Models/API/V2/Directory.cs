@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ACME.MicrosoftCA.Gateway.Models.API
 {
     [Serializable]
-    public class DirectoryMeta
+    public class DirectoryMetaV2
     {
         [JsonProperty("terms-of-service")]
         public Uri TermsOfService { get; set; }
@@ -20,21 +20,19 @@ namespace ACME.MicrosoftCA.Gateway.Models.API
     }
 
     [Serializable]
-    public class Directory
+    public class DirectoryV2
     {
-        [JsonProperty(@"new-nonce")]
+        [JsonProperty(@"newNonce")]
         public Uri NewNonce { get; set; }
-        [JsonProperty(@"new-reg")]
-        public Uri NewRegistration { get; set; }
-        [JsonProperty(@"recover-reg")]
-        public Uri RecoverRegistration { get; set; }
-        [JsonProperty(@"new-cert")]
-        public Uri NewCertificate { get; set; }
-        [JsonProperty(@"new-authz")]
+        [JsonProperty(@"newAccount")]
+        public Uri NewAccount { get; set; }
+        [JsonProperty(@"newOrder")]
+        public Uri NewOrder { get; set; }
+        [JsonProperty(@"newAuthz")]
         public Uri NewAuthz { get; set; }
-        [JsonProperty(@"revoke-cert")]
+        [JsonProperty(@"revokeCert")]
         public Uri RevokeCert { get; set; }
-        [JsonProperty(@"key-change")]
+        [JsonProperty(@"keyChange")]
         public Uri KeyChange { get; set; }
 
         [JsonProperty(@"meta")]
@@ -43,12 +41,12 @@ namespace ACME.MicrosoftCA.Gateway.Models.API
         public static Directory Default(Uri myUri) =>
             new Directory
             {
-                NewNonce = new Uri(myUri, @"acme/v1/new-nonce"),
-                NewRegistration = new Uri(myUri, @"acme/v1/new-account"),
-                NewCertificate = new Uri(myUri, @"acme/v1/new-order"),
-                NewAuthz = new Uri(myUri, @"acme/v1/new-authz"),
-                RevokeCert = new Uri(myUri, @"acme/v1/revoke-cert"),
-                KeyChange = new Uri(myUri, @"acme/v1/key-change"),
+                NewNonce = new Uri(myUri, @"acme/v2/new-nonce"),
+                NewRegistration = new Uri(myUri, @"acme/v2/new-account"),
+                NewCertificate = new Uri(myUri, @"acme/v2/new-order"),
+                //newAuthz = new Uri(myUri, @"acme/new-authz"),
+                RevokeCert = new Uri(myUri, @"acme/v2/revoke-cert"),
+                KeyChange = new Uri(myUri, @"acme/v2/key-change"),
                 Meta = new DirectoryMeta
                 {
                     TermsOfService = new Uri(myUri, @"tos"),

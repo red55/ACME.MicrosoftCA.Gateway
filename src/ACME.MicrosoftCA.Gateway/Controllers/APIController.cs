@@ -29,7 +29,6 @@ namespace ACME.MicrosoftCA.Gateway.Controllers
             Settings = cfg.Value;
             _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
         }
-            
 
         private readonly IActionDescriptorCollectionProvider _actionDescriptorCollectionProvider;
 

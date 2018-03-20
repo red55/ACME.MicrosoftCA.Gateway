@@ -22,8 +22,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\acme\Data\" />
-    <Folder Include="Controllers\acme\Models\" />
+    <Compile Remove="Controllers\acme\Data\**" />
+    <Compile Remove="Controllers\acme\Models\**" />
+    <Content Remove="Controllers\acme\Data\**" />
+    <Content Remove="Controllers\acme\Models\**" />
+    <EmbeddedResource Remove="Controllers\acme\Data\**" />
+    <EmbeddedResource Remove="Controllers\acme\Models\**" />
+    <None Remove="Controllers\acme\Data\**" />
+    <None Remove="Controllers\acme\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

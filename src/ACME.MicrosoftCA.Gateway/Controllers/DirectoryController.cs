@@ -36,15 +36,7 @@ namespace ACME.MicrosoftCA.Gateway.Controllers
         {
             var myUri = Request.MyOrProxyUri();
 
-            return Json(new Models.API.Directory
-            {
-                newNonce = new Uri(myUri, @"acme/new-nonce"),
-                newAccount = new Uri(myUri, @"acme/new-account"),
-                newOrder = new Uri(myUri, @"acme/new-order"),
-                newAuthz = new Uri(myUri, @"acme/new-authz"),
-                revokeCert = new Uri(myUri,@"acme/revoke-cert"),
-                keyChange = new Uri(myUri, @"acme/key-change")
-            });
+            return Json(Models.API.Directory.Default(myUri));
         }
     }
 }

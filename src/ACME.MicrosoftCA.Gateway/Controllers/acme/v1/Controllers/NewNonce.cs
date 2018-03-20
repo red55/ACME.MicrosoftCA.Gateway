@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ACME.MicrosoftCA.Gateway.Controllers.acme.Controllers
 {
     [EnableCors(@"AllowAllOrigins")]
-    [Route(@"/acme/new-nonce")]
+    [Route(@"/acme/v1/new-nonce")]
     public class NewNonce : ACME.MicrosoftCA.Gateway.Controllers.APIController
     {
         public NewNonce(IOptionsSnapshot<Config> cfg) : base(cfg) { }

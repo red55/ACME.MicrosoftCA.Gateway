@@ -11,17 +11,20 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http;
 using System.Net;
 
-namespace ACME.MicrosoftCA.Gateway.Unit.Tests
+namespace ACME.MicrosoftCA.Gateway.Integration.Tests
 {
-    public class UnitTest1
+    [Collection("Database collection")]
+    public class IntegrationTest1
     {
         TestServer _WebServer;
         public TestServer WebServer { get => _WebServer; set => _WebServer = value; }
 
-        public UnitTest1()
+        readonly Fixtures.DatabaseFixture _dbf;
+        public IntegrationTest1(Fixtures.DatabaseFixture dbf)
         {
+            _dbf = dbf;
             WebServer = new TestServer(new WebHostBuilder()
-                .UseStartup<ACME.MicrosoftCA.Gateway.Startup>());
+                .UseStartup<ACME.MicrosoftCA.Gateway.Integration.Tests.Fakes.Startup>());
         }
 
         [Fact]
@@ -73,8 +76,8 @@ namespace ACME.MicrosoftCA.Gateway.Unit.Tests
                     BeOfType<string>();
 
         }
-
-        private async Task RegisterAsync()
+        [Fact]
+        public async Task RegisterAsync()
         {
             using (var _pk = new RSACryptoServiceProvider())
             {
@@ -84,6 +87,7 @@ namespace ACME.MicrosoftCA.Gateway.Unit.Tests
 
                 var req = new Oocx.Acme.Protocol.NewRegistrationRequest
                 {
+                    
                     Contact = contact
                 };
                 var r = await ac.RegisterAsync(req);

@@ -19,5 +19,7 @@ namespace ACME.MicrosoftCA.Gateway.Exceptions
         protected ApiException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
         public HttpStatusCode HttpStatus { get; protected set; }
+
+        public virtual Models.API.Problem Problem { get; protected set; }
     }
 }

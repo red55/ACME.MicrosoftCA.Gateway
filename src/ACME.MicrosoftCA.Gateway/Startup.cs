@@ -66,15 +66,23 @@ namespace ACME.MicrosoftCA.Gateway
             services.AddTransient<IReplayNonceRegistry, ReplayNocneRegistry>();
         }
 
+
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+#pragma warning disable CC0091 // Use static method
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
+#pragma warning restore CC0091 // Use static method
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseReplayNonceMiddleware();
+
+            app.UseMiddleware<ReplayNonceMiddleware>();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseMvc();
         }
