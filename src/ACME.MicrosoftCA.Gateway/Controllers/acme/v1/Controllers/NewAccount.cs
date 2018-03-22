@@ -24,9 +24,9 @@ namespace ACME.MicrosoftCA.Gateway.Controllers.acme.Controllers
             using (var tr = new StreamReader(Request.Body))
             {
                 var s = tr.ReadToEnd();
-                var payload JwtCore.JsonWebToken.Decode()
+                //var payload JwtCore.JsonWebToken.Decode()
 
-                return Json(tp);
+                return Json(s);
             }
         }
     }
