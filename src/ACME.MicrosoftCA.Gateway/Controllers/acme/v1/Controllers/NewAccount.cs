@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,7 +20,14 @@ namespace ACME.MicrosoftCA.Gateway.Controllers.acme.Controllers
         [HttpPost]
         public async Task<JsonResult> Index()
         {
-            return Json(null);
+           
+            using (var tr = new StreamReader(Request.Body))
+            {
+                var s = tr.ReadToEnd();
+                var payload JwtCore.JsonWebToken.Decode()
+
+                return Json(tp);
+            }
         }
     }
 }

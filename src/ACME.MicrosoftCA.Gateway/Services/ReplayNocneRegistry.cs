@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ACME.MicrosoftCA.Gateway.Exceptions ;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace ACME.MicrosoftCA.Gateway.Services
 {
@@ -29,7 +30,7 @@ namespace ACME.MicrosoftCA.Gateway.Services
         {
             var n = new Models.Data.ReplayNonce
             {
-                Nonce = Guid.NewGuid().ToString(@"N"),
+                Nonce = WebEncoders.Base64UrlEncode(Guid.NewGuid().ToByteArray()),
                 IssedAt = DateTimeOffset.Now
             };
             await Db.IssuedNonces.AddAsync(n);

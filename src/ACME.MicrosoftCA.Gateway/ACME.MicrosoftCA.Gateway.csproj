@@ -38,10 +38,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="codecracker.CSharp" Version="1.0.1" />
+    <PackageReference Include="codecracker.CSharp" Version="1.0.3" />
     <PackageReference Include="CommandLineParser" Version="2.2.1" />
-    <PackageReference Include="jose-jwt" Version="2.4.0" />
+    <PackageReference Include="JwtCore" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
