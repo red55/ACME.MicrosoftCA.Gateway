@@ -12,7 +12,7 @@ namespace ACME.MicrosoftCA.Gateway.Services
     public interface IReplayNonceRegistry
     {
         Task<Models.Data.ReplayNonce> NewNonceAsync();
-        Task VerifyNonceAsync(string nonce_);
+        Task<bool> VerifyNonceAsync(string nonce_);
         Task SetNonceUsedAsync(string nonce_);
 
     }
@@ -43,7 +43,7 @@ namespace ACME.MicrosoftCA.Gateway.Services
         public async Task SetNonceUsedAsync(string nonce_)
         {
             var l = await
-                (from nonce in Db.IssuedNonces where nonce.Nonce == nonce_ select nonce).ToListAsync();
+                (from nonce in Db.IssuedNonces where nonce.Nonce == nonce_ select nonce).ToListAsync().ConfigureAwait(false);
 
             var n = l.FirstOrDefault();
             if (null == n)
@@ -51,27 +51,26 @@ namespace ACME.MicrosoftCA.Gateway.Services
                 throw new BadReplayNonceException();
             }
 
-            Db.IssuedNonces.Remove(n);
+            Db.Entry(n).State = EntityState.Deleted;
             await Db.SaveChangesAsync();
         }
 
-        public async Task VerifyNonceAsync(string nonce_)
+        public async Task<bool> VerifyNonceAsync(string nonce_)
         {
             if (null == nonce_)
             {
-                throw new Exceptions.BadReplayNonceException();
+                return false;
             }
-            var l = await
-                (from nonce in Db.IssuedNonces where nonce.Nonce == nonce_ select nonce).ToListAsync();
+            var l = await (from
+                                nonce
+                           in
+                               Db.IssuedNonces
+                           where
+                               nonce.Nonce == nonce_
+                           select
+                                nonce).ToListAsync();
 
-            var n = l.FirstOrDefault();
-            if (null == n)
-            {
-                throw new BadReplayNonceException();
-            }
-
-            //TODO: make check for nonce lifetime
-
+            return l.Any();
         }
     }
 }

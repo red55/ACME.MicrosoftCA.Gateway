@@ -38,23 +38,34 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Authentication">
+      <HintPath>..\..\..\Microsoft\Security\src\Microsoft.AspNetCore.Authentication.Cookies\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Authentication.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Cookies">
+      <HintPath>..\..\..\Microsoft\Security\src\Microsoft.AspNetCore.Authentication.Cookies\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Authentication.Cookies.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.0.3" />
     <PackageReference Include="CommandLineParser" Version="2.2.1" />
     <PackageReference Include="JwtCore" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.All" version="2.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="6.8.2.4717" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
     
-  </ItemGroup>
+  </ItemGroup>  
 
 </Project>

@@ -10,7 +10,12 @@ namespace ACME.MicrosoftCA.Gateway.Exceptions
     [Serializable]
     public class ApiException : Exception
     {
-        public ApiException() {}
+        protected virtual void Init()
+        {
+
+        }
+
+        public ApiException() { }
 
         public ApiException(string message) : base(message) { }
 

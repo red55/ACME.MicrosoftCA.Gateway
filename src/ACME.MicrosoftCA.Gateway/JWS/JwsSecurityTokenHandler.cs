@@ -16,8 +16,6 @@ namespace ACME.MicrosoftCA.Gateway.JWS
 
             var t = JsonConvert.DeserializeObject<JwsMessage>(token);
 
-            //t.RawData = token;
-
             return t.ToJwtToken();
         }
         public override SecurityToken ReadToken(string token)
@@ -44,28 +42,28 @@ namespace ACME.MicrosoftCA.Gateway.JWS
 
             return base.ValidateToken(token, validationParameters, out validatedToken);
 
-
         }
 
-        public override Type TokenType
-        {
-            get { return typeof(JwtSecurityToken); }
-        }
+        public override Type TokenType =>
+            typeof(JwtSecurityToken);
 
-        public override bool CanReadToken(string token)
+
+        public override bool CanReadToken(string tokenString)
         {
             try
             {
 
-                var tt = DoReadToken(token);
+                var tt = DoReadToken(tokenString);
 
-                return tt is JwtSecurityToken ? true : false;
+                return tt is JwtSecurityToken;
 
             }
+#pragma warning disable CC0003 // Your catch should include an Exception
             catch
             {
                 return false;
             }
+#pragma warning restore CC0003 // Your catch should include an Exception
         }
     }
 }

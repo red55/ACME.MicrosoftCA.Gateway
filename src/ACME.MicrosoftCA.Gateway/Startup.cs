@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ACME.MicrosoftCA.Gateway.Authentication;
 using ACME.MicrosoftCA.Gateway.Configuration;
+using ACME.MicrosoftCA.Gateway.Extensions;
 using ACME.MicrosoftCA.Gateway.Middleware;
 using ACME.MicrosoftCA.Gateway.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using Microsoft.IdentityModel.Tokens;
 
 namespace ACME.MicrosoftCA.Gateway
 {
@@ -32,12 +35,25 @@ namespace ACME.MicrosoftCA.Gateway
 
             services.Configure<Config>(cs);
 
+            services.AddAuthentication(AcmeJwsAuthenticationDefaults.AuthenticationScheme).AddAcmeJws();
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+
             //According to draft-ietf-acme-acme.html 6.1
             services.AddCors((options) =>
             {
                 options.AddPolicy(@"AllowAllOrigins", (policy) => policy.AllowAnyOrigin());
             });
 
+            services.AddScoped<JWS.AcmeJwsSecurityTokenHandler>();
+
+            services.AddAuthorization((options) => {
+                options.AddPolicy(@"new-reg", (policy) =>
+                {
+                    policy.RequireClaim("Resource", "new-reg");
+                    policy.RequireClaim("Contact");
+                    policy.RequireClaim("www","www");
+                });
+            });
             services.AddMvc();
 
             services.AddDbContext<Services.DataBase>(contextLifetime: ServiceLifetime.Transient, optionsLifetime:ServiceLifetime.Transient, optionsAction: (options) => {
@@ -84,7 +100,11 @@ namespace ACME.MicrosoftCA.Gateway
             app.UseMiddleware<ReplayNonceMiddleware>();
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
+            app.UseCors(@"AllowAllOrigins");
+            app.UseAuthentication();
+            
             app.UseMvc();
+
         }
     }
 }

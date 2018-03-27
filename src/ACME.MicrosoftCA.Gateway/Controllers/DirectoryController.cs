@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ACME.MicrosoftCA.Gateway.Configuration;
 using ACME.MicrosoftCA.Gateway.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -15,6 +16,7 @@ namespace ACME.MicrosoftCA.Gateway.Controllers
 #pragma warning disable S101 // Types should be named in camel case
 
     [EnableCors(@"AllowAllOrigins")]
+    [Authorize]
     public class DirectoryController : APIController
     {
         public DirectoryController (IOptionsSnapshot<Config> cfg
@@ -29,7 +31,8 @@ namespace ACME.MicrosoftCA.Gateway.Controllers
 
         {
         }
-
+        
+        [AllowAnonymous]
         [Route(@"directory")]
         [HttpGet]
         public JsonResult Index()

@@ -11,7 +11,7 @@ namespace ACME.MicrosoftCA.Gateway.Exceptions
     {
         protected string Nonce { get; set; }
 
-        private void Init()
+        protected override void Init()
         {
             HttpStatus = System.Net.HttpStatusCode.BadRequest;
             Problem = new Models.API.Problem
